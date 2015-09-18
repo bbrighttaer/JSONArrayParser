@@ -41,7 +41,7 @@ public class JsonArrayUtil
                 fs[i] = (float)((double)floats[i]);
             }
             return fs;
-        } catch (JsonSyntaxException e) {
+        } catch (JsonSyntaxException | NumberFormatException e) {
             java.util.logging.Logger.getLogger(JsonArrayUtil.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
             return null;
         }
