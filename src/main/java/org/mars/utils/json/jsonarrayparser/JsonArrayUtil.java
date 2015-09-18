@@ -34,10 +34,11 @@ public class JsonArrayUtil
             StringBuilder sb = new StringBuilder();
             sb.append("{\"elements\":").append(jsonArrayStr).append("}");
             ArrayHolder<Float> arrayHolder = gson.fromJson(sb.toString(), ArrayHolder.class);
-            Float[] floats = arrayHolder.getElements();
+            System.out.println(sb.toString());
+            Object[] floats = arrayHolder.getElements();
             float[] fs = new float[floats.length];
             for (int i = 0; i < fs.length; i++) {
-                fs[i] = floats[i];
+                fs[i] = (float)((double)floats[i]);
             }
             return fs;
         } catch (JsonSyntaxException e) {
