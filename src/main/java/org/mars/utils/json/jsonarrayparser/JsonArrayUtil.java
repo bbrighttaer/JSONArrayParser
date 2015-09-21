@@ -29,21 +29,25 @@ public class JsonArrayUtil
      */
     public float[] getFloatArray(String jsonArrayStr)
     {
-        try 
+        if (jsonArrayStr!=null) 
         {
-            StringBuilder sb = new StringBuilder();
-            sb.append("{\"elements\":").append(jsonArrayStr).append("}");
-            ArrayHolder<Float> arrayHolder = gson.fromJson(sb.toString(), ArrayHolder.class);
-            System.out.println(sb.toString());
-            Object[] floats = arrayHolder.getElements();
-            float[] fs = new float[floats.length];
-            for (int i = 0; i < fs.length; i++) {
-                fs[i] = (float)((double)floats[i]);
+            try 
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.append("{\"elements\":").append(jsonArrayStr).append("}");
+                ArrayHolder<Float> arrayHolder = gson.fromJson(sb.toString(), ArrayHolder.class);
+                System.out.println(sb.toString());
+                Object[] floats = arrayHolder.getElements();
+                float[] fs = new float[floats.length];
+                for (int i = 0; i < fs.length; i++) {
+                    fs[i] = (float) ((double) floats[i]);
+                }
+                return fs;
+            } catch (JsonSyntaxException | NumberFormatException e) {
+                java.util.logging.Logger.getLogger(JsonArrayUtil.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
+                return null;
             }
-            return fs;
-        } catch (JsonSyntaxException e) {
-            java.util.logging.Logger.getLogger(JsonArrayUtil.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
-            return null;
         }
+        return null;
     }
 }
