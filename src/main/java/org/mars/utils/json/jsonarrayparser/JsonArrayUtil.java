@@ -29,18 +29,19 @@ public class JsonArrayUtil
      */
     public float[] getFloatArray(String jsonArrayStr)
     {
-        if (jsonArrayStr!=null) 
+        if (jsonArrayStr!=null && !jsonArrayStr.equalsIgnoreCase("null")) 
         {
             try 
             {
                 StringBuilder sb = new StringBuilder();
                 sb.append("{\"elements\":").append(jsonArrayStr).append("}");
                 ArrayHolder<Float> arrayHolder = gson.fromJson(sb.toString(), ArrayHolder.class);
-                System.out.println(sb.toString());
                 Object[] floats = arrayHolder.getElements();
                 float[] fs = new float[floats.length];
                 for (int i = 0; i < fs.length; i++) {
-                    fs[i] = (float) ((double) floats[i]);
+                    Double val = (double) floats[i];
+                    if(!val.isNaN())
+                    fs[i] = val.floatValue();
                 }
                 return fs;
             } catch (JsonSyntaxException | NumberFormatException e) {
