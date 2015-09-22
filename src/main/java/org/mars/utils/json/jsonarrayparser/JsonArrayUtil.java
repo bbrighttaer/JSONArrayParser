@@ -48,7 +48,7 @@ public class JsonArrayUtil
                 java.util.logging.Logger.getLogger(JsonArrayUtil.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
                 return null;
             }
-        }
+        } 
         return null;
     }
 }
